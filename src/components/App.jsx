@@ -3,17 +3,17 @@ import { Home } from '../Pages/Home/Home.jsx';
 import { Movies } from 'Pages/Movies/Movies.jsx';
 import { SharedLayout } from './SharedLayout/SharedLayout.jsx';
 import { MovieDetails } from './MovieDetails/MovieDetails.jsx';
+import { Cast } from './Cast/Cast.jsx';
 
 export const App = () => {
   return (
     <Routes>
       <Route path="/" element={<SharedLayout />}>
         <Route index element={<Home />} />
-        <Route path="/movies" element={<Movies />} />
-        {/* <Route
-          path="/movies/:movieId"
-          element={} />}
-        /> */}
+        <Route path="/movie" element={<Movies />} />
+        <Route path="/movie/:id" element={<MovieDetails />}>
+          <Route path="cast" element={<Cast />} />;
+        </Route>
       </Route>
     </Routes>
   );
