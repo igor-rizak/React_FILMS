@@ -1,8 +1,7 @@
+// Cast.styled.js
 import styled from "styled-components";
 
 export const CastContainer = styled.div`
-
-
   padding: 20px;
   background-color: #f8f8f8;
 `;
@@ -15,15 +14,16 @@ export const CastTitle = styled.h2`
 export const CastList = styled.ul`
   list-style-type: none;
   padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap:10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 `;
 
 export const CastItem = styled.li`
   display: flex;
-  align-items: center;
-  width:200px;
+  flex-direction: column; /* Встановлює напрямок на вертикальний */
+  align-items: center; /* Центрує вміст по горизонталі */
+  width: 200px;
   margin-bottom: 10px;
   padding: 10px;
   background-color: #fff;
@@ -32,12 +32,13 @@ export const CastItem = styled.li`
 `;
 
 export const ActorName = styled.p`
-  margin: 0 10px;
+  margin: 10px 0 0; 
   font-size: 18px;
+  text-align: center; /* Центрує текст всередині параграфа */
 `;
 
 export const ActorImage = styled.img`
-  width: 50px;
-  height: 75px;
+  /* width: 150px;
+  height: 175px; */
   border-radius: 5px;
 `;

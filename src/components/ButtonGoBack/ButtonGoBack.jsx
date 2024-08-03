@@ -1,15 +1,9 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+import { StyledButton } from './ButtonGoBack.styled';
 
-export const ButtonGoBack = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const subLocation = location?.state?.from || '/';
-
-  const onGoback = () => navigate(subLocation);
-
+export const ButtonGoBack = ({ onClick }) => {
   return (
-    <button type="button" onClick={onGoback}>
+    <StyledButton type="button" onClick={onClick}>
       Go BACK
-    </button>
+    </StyledButton>
   );
 };

@@ -1,15 +1,18 @@
-import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { List, ListItem, MovieLink } from './ListSearchMovies.styled';
 
 export const ListSearchMovies = ({ films }) => {
+  const location = useLocation();
+
   return (
-    <ul>
+    <List>
       {films.map(film => (
-        <li key={film.id}>
-          <Link to={`/movie/${film.id}`}>
+        <ListItem key={film.id}>
+          <MovieLink to={`/movie/${film.id}`} state={{ from: location }}>
             <h2>{film.title}</h2>
-          </Link>
-        </li>
+          </MovieLink>
+        </ListItem>
       ))}
-    </ul>
+    </List>
   );
 };

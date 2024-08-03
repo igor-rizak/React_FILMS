@@ -1,52 +1,53 @@
-import { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { getSearchMovies } from 'API/Api';
 import { ListSearchMovies } from 'components/listSearchMovies/listSearchMovies';
-import { ButtonGoBack } from 'components/ButtonGoBack/ButtonGoBack';
 
 export const Movies = () => {
-  const [movie, setMovie] = useState([]);
-  const [query, setQuery] = useState('');
+  const [movies, setMovies] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const query = searchParams.get('q') || ''; // Отримання параметру 'q' з URL
+  const [inputQuery, setInputQuery] = useState(query); // Збереження запиту для пошуку
 
-  const location = useLocation();
-  const navigate = useNavigate();
+  useEffect(() => {
+    if (query) {
+      searchMovie(query);
+    }
+  }, [query]);
 
-  const searchMovie = async () => {
+  const searchMovie = async query => {
     if (!query) return;
     try {
       const searchMovies = await getSearchMovies(query);
-      setMovie(searchMovies);
-
-      setQuery('');
+      setMovies(searchMovies);
     } catch (error) {
-      console.error('Error fetching trending films:', error);
+      console.error('Error fetching movies:', error);
     }
   };
 
-  // navigate({
-  //   ...location,
-  //   search: `query=${value}`,
-  // });
+  const handleSearchClick = () => {
+    setSearchParams({ q: inputQuery });
+    setInputQuery('');
+  };
+
   const changeInput = e => {
-    const value = e.target.value;
-    setQuery(value);
+    setInputQuery(e.target.value);
   };
 
   return (
     <>
-      <ButtonGoBack />
       <input
-        value={query}
+        value={inputQuery}
         type="text"
         autoComplete="off"
         autoFocus
         placeholder="Search movies"
         onChange={changeInput}
       />
-      <button type="button" onClick={searchMovie}>
+      <button type="button" onClick={handleSearchClick}>
         Search
       </button>
-      {movie.length > 0 && <ListSearchMovies films={movie} />}
+      {movies.length > 0 && <ListSearchMovies films={movies} />}
     </>
   );
 };

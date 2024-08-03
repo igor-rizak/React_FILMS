@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getMovieCredits } from 'API/Api';
 import { useParams } from 'react-router-dom';
+import img from '../IMG/poster.jpg';
 import {
   CastContainer,
   CastTitle,
@@ -37,7 +38,11 @@ export const Cast = () => {
         {actors.map(actor => (
           <CastItem key={actor.cast_id}>
             <ActorImage
-              src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
+              src={
+                actor.profile_path
+                  ? `https://image.tmdb.org/t/p/w200${actor.profile_path}`
+                  : img
+              }
               alt={actor.name}
             />
             <ActorName>{actor.name}</ActorName>
