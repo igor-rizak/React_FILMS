@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMovieReviews } from 'API/Api';
 import {
@@ -10,8 +10,9 @@ import {
 } from './Reviews.styled';
 
 export const Reviews = () => {
-  const { id } = useParams();
   const [reviews, setReviews] = useState('');
+  const { id } = useParams();
+  const listReviews = useRef(null);
 
   useEffect(() => {
     const movieReviews = async () => {
@@ -25,13 +26,24 @@ export const Reviews = () => {
     movieReviews();
   }, [id]);
 
+  useEffect(() => {
+    if (reviews.length > 0 && listReviews !== null) {
+      const listReviewsCurrent = listReviews.current;
+      const rect = listReviewsCurrent.getBoundingClientRect();
+      window.scrollTo({
+        top: rect.top,
+        behavior: 'smooth',
+      });
+    }
+  }, [reviews]);
+
   if (!reviews) {
     return <p>Loading...</p>;
   }
   return (
     <>
       {reviews.length > 0 ? (
-        <List>
+        <List ref={listReviews}>
           {reviews.map(rev => (
             <ListItem key={rev.id}>
               <Author>{rev.author}</Author>

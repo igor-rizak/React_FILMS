@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { getMovieCredits } from 'API/Api';
 import { useParams } from 'react-router-dom';
 import img from '../IMG/poster.jpg';
@@ -14,6 +14,7 @@ import {
 export const Cast = () => {
   const [actors, setActors] = useState([]);
   const { id } = useParams();
+  const listEl = useRef(null);
 
   useEffect(() => {
     const movieCredits = async () => {
@@ -27,6 +28,17 @@ export const Cast = () => {
     movieCredits();
   }, [id]);
 
+  useEffect(() => {
+    if (actors.length > 0 && listEl.current) {
+      const listElCurrent = listEl.current;
+      const rect = listElCurrent.getBoundingClientRect();
+      window.scrollTo({
+        top: rect.top + window.scrollY,
+        behavior: 'smooth',
+      });
+    }
+  }, [actors]);
+
   if (!actors.length) {
     return <p>Loading...</p>;
   }
@@ -34,7 +46,7 @@ export const Cast = () => {
   return (
     <CastContainer>
       <CastTitle>CAST</CastTitle>
-      <CastList>
+      <CastList ref={listEl}>
         {actors.map(actor => (
           <CastItem key={actor.cast_id}>
             <ActorImage

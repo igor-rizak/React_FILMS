@@ -8,8 +8,8 @@ import { Nav, NavLink } from './MovieDetails.styled';
 export const MovieDetails = () => {
   const [film, setFilm] = useState(null);
   const [loading, setLoading] = useState(true);
-  const { id } = useParams();
 
+  const { id } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
   const subLocation = location?.state?.from;
@@ -28,6 +28,8 @@ export const MovieDetails = () => {
     searchMovieDetails();
   }, [id]);
 
+  const onGoBack = () => navigate(location?.state?.from ?? '/');
+
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -36,7 +38,6 @@ export const MovieDetails = () => {
     return <p>Movie not found.</p>;
   }
 
-  const onGoBack = () => navigate(location?.state?.from ?? '/');
   return (
     <>
       <ButtonGoBack onClick={onGoBack} />
