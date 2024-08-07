@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Container, Header, Link } from './SharedLayout.styled.js';
 
-export const SharedLayout = () => {
+const SharedLayout = () => {
   return (
     <>
       <Container>
@@ -19,3 +19,5 @@ export const SharedLayout = () => {
     </>
   );
 };
+
+export default SharedLayout;

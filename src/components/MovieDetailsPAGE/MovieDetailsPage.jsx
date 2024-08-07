@@ -1,4 +1,3 @@
-// MovieDetailsPage.js
 import React from 'react';
 import { URL_POSTER } from 'API/Api';
 import {

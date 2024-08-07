@@ -5,7 +5,7 @@ import { ButtonGoBack } from 'components/ButtonGoBack/ButtonGoBack';
 import { MovieDetailsPage } from 'components/MovieDetailsPAGE/MovieDetailsPage';
 import { Nav, NavLink } from './MovieDetails.styled';
 
-export const MovieDetails = () => {
+const MovieDetails = () => {
   const [film, setFilm] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -54,3 +54,5 @@ export const MovieDetails = () => {
     </>
   );
 };
+
+export default MovieDetails;

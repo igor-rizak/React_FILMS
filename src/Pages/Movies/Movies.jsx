@@ -3,11 +3,11 @@ import { useSearchParams } from 'react-router-dom';
 import { getSearchMovies } from 'API/Api';
 import { ListSearchMovies } from 'components/listSearchMovies/listSearchMovies';
 
-export const Movies = () => {
+const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
-  const query = searchParams.get('q') || ''; // Отримання параметру 'q' з URL
-  const [inputQuery, setInputQuery] = useState(query); // Збереження запиту для пошуку
+  const query = searchParams.get('q') ?? '';
+  const [inputQuery, setInputQuery] = useState(query);
 
   useEffect(() => {
     if (query) {
@@ -51,3 +51,5 @@ export const Movies = () => {
     </>
   );
 };
+
+export default Movies;

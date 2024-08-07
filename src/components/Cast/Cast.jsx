@@ -11,7 +11,7 @@ import {
   ActorName,
 } from './Cast.styled';
 
-export const Cast = () => {
+const Cast = () => {
   const [actors, setActors] = useState([]);
   const { id } = useParams();
   const listEl = useRef(null);
@@ -64,3 +64,5 @@ export const Cast = () => {
     </CastContainer>
   );
 };
+
+export default Cast;

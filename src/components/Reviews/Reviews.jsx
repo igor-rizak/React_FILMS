@@ -9,7 +9,7 @@ import {
   StyledDateText,
 } from './Reviews.styled';
 
-export const Reviews = () => {
+const Reviews = () => {
   const [reviews, setReviews] = useState('');
   const { id } = useParams();
   const listReviews = useRef(null);
@@ -30,7 +30,6 @@ export const Reviews = () => {
     if (reviews.length > 0 && listReviews !== null) {
       const listReviewsCurrent = listReviews.current;
       const rect = listReviewsCurrent.getBoundingClientRect();
-      console.log(rect);
       window.scrollTo({
         top: rect.top,
         behavior: 'smooth',
@@ -59,3 +58,5 @@ export const Reviews = () => {
     </>
   );
 };
+
+export default Reviews;
